@@ -78,6 +78,7 @@ void process_action(keyrecord_t *record)
         case ACT_LMODS:
         case ACT_RMODS:
             {
+                action_hook_key(record, action);
                 uint8_t mods = (action.kind.id == ACT_LMODS) ?  action.key.mods :
                                                                 action.key.mods<<4;
                 if (event.pressed) {
@@ -434,9 +435,9 @@ void register_code(uint8_t code)
     else if IS_SYSTEM(code) {
         host_system_send(KEYCODE2SYSTEM(code));
     }
-    else if IS_CONSUMER(code) {
+    /*else if IS_CONSUMER(code) {
         host_consumer_send(KEYCODE2CONSUMER(code));
-    }
+    }*/
 }
 
 void unregister_code(uint8_t code)
@@ -492,9 +493,9 @@ void unregister_code(uint8_t code)
     else if IS_SYSTEM(code) {
         host_system_send(0);
     }
-    else if IS_CONSUMER(code) {
+    /*else if IS_CONSUMER(code) {
         host_consumer_send(0);
-    }
+    }*/
 }
 
 void register_mods(uint8_t mods)

@@ -38,8 +38,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define IS_SPECIAL(code)         ((0xA5 <= (code) && (code) <= 0xDF) || (0xE8 <= (code) && (code) <= 0xFF))
 #define IS_SYSTEM(code)          (KC_PWR       <= (code) && (code) <= KC_WAKE)
-#define IS_CONSUMER(code)        (KC_MUTE      <= (code) && (code) <= KC_WFAV)
-#define IS_FN(code)              (KC_FN0       <= (code) && (code) <= KC_FN31)
+/*#define IS_CONSUMER(code)        (KC_MUTE      <= (code) && (code) <= KC_WFAV)*/
+#define IS_FN(code)              (KC_FN0       <= (code) && (code) <= KC_FN47)
 #define IS_MOUSEKEY(code)        (KC_MS_UP     <= (code) && (code) <= KC_MS_ACCEL2)
 #define IS_MOUSEKEY_MOVE(code)   (KC_MS_UP     <= (code) && (code) <= KC_MS_RIGHT)
 #define IS_MOUSEKEY_BUTTON(code) (KC_MS_BTN1   <= (code) && (code) <= KC_MS_BTN5)
@@ -51,7 +51,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define FN_BIT(code)    (1<<FN_INDEX(code))
 #define FN_INDEX(code)  ((code) - KC_FN0)
 #define FN_MIN          KC_FN0
-#define FN_MAX          KC_FN31
+#define FN_MAX          KC_FN47
 
 
 /*
@@ -415,7 +415,9 @@ enum internal_special_keycodes {
     KC_SYSTEM_SLEEP,
     KC_SYSTEM_WAKE,
 
-    /* Media Control */
+    KC_BOOTLOADER       = 0xAF,
+
+    /* consumer keys removed - make room for FN keys 
     KC_AUDIO_MUTE,
     KC_AUDIO_VOL_UP,
     KC_AUDIO_VOL_DOWN,
@@ -436,13 +438,10 @@ enum internal_special_keycodes {
     KC_WWW_FORWARD,
     KC_WWW_STOP,
     KC_WWW_REFRESH,
-    KC_WWW_FAVORITES,    /* 0xBC */
+    KC_WWW_FAVORITES, */
 
-    /* Jump to bootloader */
-    KC_BOOTLOADER       = 0xBF,
-
-    /* Fn key */
-    KC_FN0              = 0xC0,
+    /* Fn key - address changed */
+    KC_FN0              = 0xB0,
     KC_FN1,
     KC_FN2,
     KC_FN3,
@@ -459,7 +458,7 @@ enum internal_special_keycodes {
     KC_FN14,
     KC_FN15,
 
-    KC_FN16             = 0xD0,
+    KC_FN16             = 0xC0,
     KC_FN17,
     KC_FN18,
     KC_FN19,
@@ -474,7 +473,25 @@ enum internal_special_keycodes {
     KC_FN28,
     KC_FN29,
     KC_FN30,
-    KC_FN31,            /* 0xDF */
+    KC_FN31,            /* 0xCF */
+
+    KC_FN32             = 0xD0,
+    KC_FN33,
+    KC_FN34,
+    KC_FN35,
+    KC_FN36,
+    KC_FN37,
+    KC_FN38,
+    KC_FN39,
+    KC_FN40,
+    KC_FN41,
+    KC_FN42,
+    KC_FN43,
+    KC_FN44,
+    KC_FN45,
+    KC_FN46,
+    KC_FN47,            /* 0xDF */
+
 
     /**************************************/
     /* 0xE0-E7 for Modifiers. DO NOT USE. */

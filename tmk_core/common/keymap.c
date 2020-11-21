@@ -40,7 +40,7 @@ action_t action_for_key(uint8_t layer, keypos_t key)
 {
     uint8_t keycode = keymap_key_to_keycode(layer, key);
     switch (keycode) {
-        case KC_FN0 ... KC_FN31:
+        case KC_FN0 ... KC_FN47:
             return keymap_fn_to_action(keycode);
 #ifdef BOOTMAGIC_ENABLE
         case KC_CAPSLOCK:
@@ -145,9 +145,9 @@ static action_t keycode_to_action(uint8_t keycode)
         case KC_SYSTEM_POWER ... KC_SYSTEM_WAKE:
             return (action_t)ACTION_USAGE_SYSTEM(KEYCODE2SYSTEM(keycode));
             break;
-        case KC_AUDIO_MUTE ... KC_WWW_FAVORITES:
+        /* case KC_AUDIO_MUTE ... KC_WWW_FAVORITES:
             return (action_t)ACTION_USAGE_CONSUMER(KEYCODE2CONSUMER(keycode));
-            break;
+            break; */
         case KC_MS_UP ... KC_MS_ACCEL2:
             return (action_t)ACTION_MOUSEKEY(keycode);
             break;
@@ -207,7 +207,7 @@ __attribute__ ((weak))
 action_t keymap_fn_to_action(uint8_t keycode)
 {
     switch (keycode) {
-        case KC_FN0 ... KC_FN31:
+        case KC_FN0 ... KC_FN47:
             {
                 uint8_t layer = keymap_fn_layer(FN_INDEX(keycode));
                 uint8_t key = keymap_fn_keycode(FN_INDEX(keycode));
