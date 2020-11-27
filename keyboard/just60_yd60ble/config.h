@@ -60,7 +60,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define ws2812_PORTREG  PORTD
 #define ws2812_DDRREG   DDRD
 #define ws2812_pin PD0
-#define RGBLED_NUM 8     // Number of LEDs
+#define RGBLED_NUM 7     // Number of LEDs
 
 /*
  * Hardware Serial(UART)

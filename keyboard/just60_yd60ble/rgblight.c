@@ -19,6 +19,7 @@ rgblight_config_t rgblight_config;
 rgblight_config_t inmem_config;
 struct cRGB led[RGBLED_NUM+1];
 
+#define INDICATOR_LED 0
 
 void sethsv(uint16_t hue, uint8_t saturation, uint8_t brightness, struct cRGB *led1)
 {
@@ -102,6 +103,11 @@ void rgblight_init(void)
         rgblight_set();
         rgblight_timer_disable();
     }
+
+    for(int i=0; i<8; ++i) {
+        setrgb(0,0,0,&led[i]);
+    }
+    ws2812_setleds(led, RGBLED_NUM);
 }
 
 
@@ -345,26 +351,39 @@ void rgblight_effect_knight(uint8_t interval)
     }
 }
 
+extern uint32_t layer_state; 
+
 #ifdef SUSPEND_ACTION
 void suspend_power_down_action(void)
 {
     PORTD &= ~(1<<PD4);
     backlight_disable();
     rgblight_timer_disable(); 
+
+    setrgb(0, 0, 0, &led[INDICATOR_LED]);
+    ws2812_setleds(led, RGBLED_NUM);
 }
 
 void suspend_wakeup_init_action(void)
 {
     backlight_init();
     rgblight_init();
+
+    hook_keyboard_loop();
 }
 #endif
 
 void hook_keyboard_loop()
 {
-    static uint8_t rgb_step = 0;
-    if (rgblight_timer_enabled && rgblight_config.enable && ++rgb_step > 80) {
-        rgb_step = 0;
-        rgblight_task();
+    // static uint8_t rgb_step = 0;
+    // if (rgblight_timer_enabled && rgblight_config.enable && ++rgb_step > 80) {
+    //     rgb_step = 0;
+    //     rgblight_task();
+    // }
+    if(layer_state & (1<<1)) { // nicola layer on
+        setrgb(0, 30, 0, &led[INDICATOR_LED]); // green - nicola on
+    } else {
+        setrgb(0, 0, 30, &led[INDICATOR_LED]); // blue - nicola off
     }
+    ws2812_setleds(led, RGBLED_NUM);
 }
