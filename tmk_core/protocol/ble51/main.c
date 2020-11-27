@@ -42,11 +42,11 @@ static void SetupHardware(void)
     // Leonardo needs. Without this USB device is not recognized.
     USB_Disable();
 
-    USB_Init();
+    //USB_Init();
 
 #ifdef CONSOLE_ENABLE
     // for Console_Task
-    USB_Device_EnableSOFEvents();
+    //USB_Device_EnableSOFEvents();
     print_set_sendchar(sendchar_func);
 #endif
 }
@@ -64,7 +64,8 @@ int main(void)
 #if defined(INTERRUPT_CONTROL_ENDPOINT)
         ;
 #else
-        USB_USBTask();
+        //USB_USBTask();
+        ;
 #endif
     }
     if (USB_DeviceState == DEVICE_STATE_Configured) {
